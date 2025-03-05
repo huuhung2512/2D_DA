@@ -1,62 +1,65 @@
+using Hung.CoreSystem;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionHitbox : WeaponComponent<ActionHitBoxData, AttackActionHitBox>
+namespace Hung.Weapons.Components 
 {
-    public event Action<Collider2D[]> OnDetectedCollider2D;
-
-    private CoreComp<Movement> movement;
-
-    private Vector2 offset;
-
-    private Collider2D[] detected;
-    private void HandleAttackAction()
+    public class ActionHitbox : WeaponComponent<ActionHitBoxData, AttackActionHitBox>
     {
-        offset.Set(
-            transform.position.x + (currentAttackData.HitBox.center.x * movement.Comp.FacingDirection),
-            transform.position.y + currentAttackData.HitBox.center.y
-            );
-        detected = Physics2D.OverlapBoxAll(offset, currentAttackData.HitBox.size, 0f, data.DetectableLayers);
+        public event Action<Collider2D[]> OnDetectedCollider2D;
 
-        if (detected.Length == 0)
+        private CoreComp<CoreSystem.Movement> movement;
+
+        private Vector2 offset;
+
+        private Collider2D[] detected;
+        private void HandleAttackAction()
         {
-            return;
-        }
-        OnDetectedCollider2D?.Invoke(detected);
-    }
+            offset.Set(
+                transform.position.x + (currentAttackData.HitBox.center.x * movement.Comp.FacingDirection),
+                transform.position.y + currentAttackData.HitBox.center.y
+                );
+            detected = Physics2D.OverlapBoxAll(offset, currentAttackData.HitBox.size, 0f, data.DetectableLayers);
 
-    protected override void Start()
-    {
-        base.Start();
-        movement = new CoreComp<Movement>(Core);
-        eventHandler.OnAttackAction += HandleAttackAction;
-    }
-    
-    protected override void OnDesTroy()
-    {
-        base.OnDesTroy();
-
-        eventHandler.OnAttackAction -= HandleAttackAction;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if(data == null)
-        {
-            return;
-        }
-        foreach(var item in data.AttackData)
-        {
-            if (!item.Debug)
+            if (detected.Length == 0)
             {
-                continue;
+                return;
             }
-            //Gizmos.color = Color.red;
-            //Gizmos.DrawWireCube(transform.position + (Vector3)item.HitBox.position,item.HitBox.size);
-            Gizmos.color = Color.white;
-            Gizmos.DrawWireCube(transform.position + (Vector3)item.HitBox.center,item.HitBox.size);
+            OnDetectedCollider2D?.Invoke(detected);
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            movement = new CoreComp<Movement>(Core);
+            eventHandler.OnAttackAction += HandleAttackAction;
+        }
+
+        protected override void OnDesTroy()
+        {
+            base.OnDesTroy();
+
+            eventHandler.OnAttackAction -= HandleAttackAction;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (data == null)
+            {
+                return;
+            }
+            foreach (var item in data.GetAllAttackData())
+            {
+                if (!item.Debug)
+                {
+                    continue;
+                }
+                //Gizmos.color = Color.red;
+                //Gizmos.DrawWireCube(transform.position + (Vector3)item.HitBox.position,item.HitBox.size);
+                Gizmos.color = Color.white;
+                Gizmos.DrawWireCube(transform.position + (Vector3)item.HitBox.center, item.HitBox.size);
+            }
         }
     }
 }
+

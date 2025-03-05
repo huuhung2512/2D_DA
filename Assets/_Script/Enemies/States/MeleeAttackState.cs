@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using Hung.Combat.Damage;
 using UnityEngine;
-
+using Hung.Combat.KnockBack;
+using Hung.Combat.PoiseDamage;
+using Hung.CoreSystem;
 public class MeleeAttackState : AttackState
 {
     protected D_MeleeAttackState stateData;
-    
     public MeleeAttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosstion,D_MeleeAttackState stateData) : base(entity, stateMachine, animBoolName, attackPosstion)
     {
         this.stateData = stateData;
@@ -50,12 +50,18 @@ public class MeleeAttackState : AttackState
             IDamageable damageable = collider.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                damageable.Damage(stateData.attackDamage);
+                Debug.Log("AAA");
+                damageable.Damage(new DamageData(stateData.attackDamage, core.Root));
             }
-            IKnockBackable knockbackable = collider.GetComponent<IKnockBackable>();
-            if(knockbackable != null)
+            IKnockBackable knockBackable = collider.GetComponent<IKnockBackable>();
+            if (knockBackable != null)
             {
-                knockbackable.KnockBack(stateData.knockbackAngle, stateData.knockbackStrength, Movement.FacingDirection);
+                knockBackable.KnockBack(new KnockBackData(stateData.knockbackAngle, stateData.knockbackStrength, Movement.FacingDirection, core.Root));
+            }
+
+            if (collider.TryGetComponent(out IPoiseDamageable poiseDamageable))
+            {
+                poiseDamageable.DamagePoise(new PoiseDamageData(stateData.PoiseDamage, core.Root));
             }
         }
     }

@@ -1,3 +1,5 @@
+using Hung.CoreSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -44,13 +46,12 @@ public class PlayerLedgeClimbState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
         Movement?.SetVelocityZero();
         player.transform.position = detectedPos;
         cornerPos = DetermineCornerPosition();
-
         startPos.Set(cornerPos.x - (Movement.FacingDirection * playerData.startOffSet.x), cornerPos.y - playerData.startOffSet.y);
         stopPos.Set(cornerPos.x + (Movement.FacingDirection * playerData.stopOffset.x), cornerPos.y + playerData.stopOffset.y);
-
         player.transform.position = startPos;
     }
 
@@ -64,11 +65,9 @@ public class PlayerLedgeClimbState : PlayerState
             isClimbing = false;
         }
     }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
 
         if (isAnimationFinished)
         {
@@ -86,8 +85,10 @@ public class PlayerLedgeClimbState : PlayerState
             xInput = player.InputHandler.NormInputX;
             yInput = player.InputHandler.NormInputY;
             jumpInput = player.InputHandler.JumpInput;
+
             Movement?.SetVelocityZero();
             player.transform.position = startPos;
+
             if (xInput == Movement.FacingDirection && isHanging && !isClimbing)
             {
                 CheckForSpace();
@@ -105,6 +106,8 @@ public class PlayerLedgeClimbState : PlayerState
             }
         }
     }
+
+
     private void CheckForSpace()
     {
         isTouchingCeiling = Physics2D.Raycast(cornerPos + (Vector2.up * 0.015f) + (Vector2.right * Movement.FacingDirection * 0.015f), Vector2.up, playerData.standColliderHeight, CollisionSenses.WhatIsGround);
@@ -123,4 +126,5 @@ public class PlayerLedgeClimbState : PlayerState
         workSpace.Set(CollisionSenses.WallCheck.position.x + (xDis * Movement.FacingDirection), CollisionSenses.WallCheck.position.y - yDis);
         return workSpace;
     }
+
 }

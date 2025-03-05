@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -11,22 +11,11 @@ public class SlimeCPManager : MonoBehaviour
 
     public List<GameObject> slimeList;
     private Timer timer = new Timer(5);
-    // Start is called before the first frame update
 
     void Start()
     {
         Spawn();
     }
-    private void OnEnable()
-    {
-        timer.OnTimerDone += HopNhatSlime;
-    }
-
-    private void OnDisable()
-    {
-        timer.OnTimerDone -= HopNhatSlime;
-    }
-
     private void Update()
     {
         timer.Tick();
@@ -52,11 +41,13 @@ public class SlimeCPManager : MonoBehaviour
     {
         if (slimeList == null)
             return;
+
         if (slimeList.Find(s => s.gameObject.activeInHierarchy == true) != null)
         {
             slimeList.ForEach(s => s.gameObject.SetActive(false));
             slimeList.Clear();
             Spawn();
         }
+        
     }
 }

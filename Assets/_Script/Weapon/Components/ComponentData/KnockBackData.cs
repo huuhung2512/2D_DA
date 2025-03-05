@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class KnockBackData : ComponentData<AttackKnockBack>
+namespace Hung.Weapons.Components
 {
-
-    protected override void SetComponentDepedency()
+    public class KnockBackData : ComponentData<AttackKnockBack>
     {
-        ComponentDependecny = typeof(KnockBack);
+        protected override void SetComponentDepedency()
+        {
+            ComponentDependecny = typeof(KnockBack);
+        }
     }
 }

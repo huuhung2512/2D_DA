@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +16,14 @@ public class Death : CoreComponent
     public void Die()
     {
         string typeEnemyName = core.transform.parent.name.ToLower();
+
+        // Hiệu ứng particle khi chết
         foreach (var particle in deathParticles)
         {
             ParticleManager.StartParticle(particle);
         }
+
+        // Logic spawn khi chết cua boss slime
         if (typeEnemyName.Contains("slime"))
         {
             Slime s = core.transform.parent.GetComponent<Slime>();
@@ -35,11 +39,24 @@ public class Death : CoreComponent
                 ParticleManager.SpawnObjectsInMultipleDirections(spawns, 3, 1);
             }
         }
-        Destroy(core.transform.parent.gameObject);
-        //core.transform.parent.gameObject.SetActive(false);
+
+        // Kiểm tra nếu là Player
         if (core.transform.parent.CompareTag("Player"))
         {
-            RespawnPlayer.Instance.Respawn();
+            if (GameManager.Instance != null)
+            {
+                core.transform.parent.gameObject.SetActive(false);
+                GameManager.Instance.PlayerDie();
+
+            }
+            else
+            {
+                Debug.LogError("GameManager.Instance is null!");
+            }
+        }
+        else
+        {
+            Destroy(core.transform.parent.gameObject); // Nếu là enemy, chỉ destroy
         }
     }
 
@@ -47,6 +64,7 @@ public class Death : CoreComponent
     {
         Stats.Health.OnCurrentValueZero += Die;
     }
+
     private void OnDisable()
     {
         Stats.Health.OnCurrentValueZero -= Die;

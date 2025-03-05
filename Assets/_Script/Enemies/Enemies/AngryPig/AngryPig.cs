@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Hung.Combat.Damage;
+using Hung.Combat.KnockBack;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using Unity.VisualScripting;
@@ -9,14 +11,12 @@ public class AngryPig : Entity
     public AG_IdleState idleState {  get; private set; }    
     public AG_MoveState moveState { get; private set; }
     public AG_ChargeState chargeState { get; private set; }
-
     [SerializeField]
     private D_IdleState idleStateData;
     [SerializeField]
     private D_ChargeState chargeStateData;
     [SerializeField]
     private D_MoveState moveStateData;
-
     public override void Awake()
     {
         base.Awake();
@@ -24,23 +24,19 @@ public class AngryPig : Entity
         idleState = new AG_IdleState(this, stateMachine, "idle", idleStateData, this);
         chargeState = new AG_ChargeState(this, stateMachine, "charge", chargeStateData, this);
     }
-    
-    
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player")) // Kiểm tra nếu Player chạm vào hitbox
         {
-            Debug.Log("cham vao player");
-            IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-            IKnockBackable knockback = collision.gameObject.GetComponent<IKnockBackable>();
+            IDamageable damageable = collision.GetComponent<IDamageable>();
+            IKnockBackable knocback = collision.GetComponent<IKnockBackable>();
             if (damageable != null)
             {
-                knockback.KnockBack(new Vector2(1, 2), 20, Movement.FacingDirection);
-                damageable.Damage(20);
-                Destroy(gameObject);
+                damageable.Damage(new DamageData(20, collision.transform.parent.gameObject));
+                knocback.KnockBack(new KnockBackData(new Vector2(1, 1), 20, 1, collision.transform.parent.gameObject));
             }
+            //Destroy(gameObject);
         }
-        
     }
     private void Start()
     {

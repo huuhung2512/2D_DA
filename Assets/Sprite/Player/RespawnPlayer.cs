@@ -1,5 +1,4 @@
 ﻿using Cinemachine;
-using Parallax2D.Example.Code;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,12 +12,11 @@ public class RespawnPlayer : SingletonBehavior<RespawnPlayer>
     public bool respawn;
     private CinemachineVirtualCamera CVC;
 
-    private InitializeBackground background;
     private void Start()
+
     {
         CVC = GameObject.Find("Player Camera").GetComponent<CinemachineVirtualCamera>();
 
-        background = FindObjectOfType<InitializeBackground>();
     }
 
     private void Update()
@@ -39,8 +37,6 @@ public class RespawnPlayer : SingletonBehavior<RespawnPlayer>
             playerTemp.transform.position = respawnPoint.position;
             CVC.m_Follow = playerTemp.transform;
             //player.gameObject.SetActive(true);
-            background.UpdatTarget(playerTemp.transform);
-
             Stats newStats = playerTemp.GetComponentInChildren<Stats>();
             PlayerHealthBar.Instance.SetStats(newStats);
             PlayerHealthBar.Instance.UpdateHealthBar();

@@ -22,12 +22,5 @@ public class AG_ChargeState : ChargeState
         {
             stateMachine.ChangeState(pig.idleState);
         }
-        else if (isChargeOverTime)
-        {
-            if (!isPlayerInMinArgoRange)
-            {
-                stateMachine.ChangeState(pig.moveState);
-            }
-        }
     }
 }

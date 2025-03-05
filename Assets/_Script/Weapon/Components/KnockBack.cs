@@ -1,37 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class KnockBack : WeaponComponent<KnockBackData, AttackKnockBack>
+using Hung.CoreSystem;
+using Hung.Combat.KnockBack;
+namespace Hung.Weapons.Components
 {
-    private ActionHitbox hitBox;
-
-    private Movement movement;
-
-    private void HandleDetectCollider2D(Collider2D[] colliders)
+    public class KnockBack : WeaponComponent<KnockBackData, AttackKnockBack>
     {
-        foreach (var item in colliders)
+        private ActionHitbox hitBox;
+
+        private Movement movement;
+
+        private void HandleDetectCollider2D(Collider2D[] colliders)
         {
-            if (item.TryGetComponent(out IKnockBackable knockBackable))
+            foreach (var item in colliders)
             {
-                knockBackable.KnockBack(currentAttackData.Angle,currentAttackData.Strength,movement.FacingDirection);
+                if (item.TryGetComponent(out IKnockBackable knockBackable))
+                {
+                    knockBackable.KnockBack(new Combat.KnockBack.KnockBackData(currentAttackData.Angle, currentAttackData.Strength, movement.FacingDirection,Core.Root));
+                }
             }
         }
-    }
-    protected override void Start()
-    {
-        base.Start();
+        protected override void Start()
+        {
+            base.Start();
 
-        hitBox = GetComponent<ActionHitbox>();
-        hitBox.OnDetectedCollider2D += HandleDetectCollider2D;
-        movement = Core.GetCoreComponent<Movement>();
-    }
+            hitBox = GetComponent<ActionHitbox>();
+            hitBox.OnDetectedCollider2D += HandleDetectCollider2D;
+            movement = Core.GetCoreComponent<Movement>();
+        }
 
-    protected override void OnDesTroy()
-    {
-        base.OnDesTroy();
-        
-        hitBox.OnDetectedCollider2D -= HandleDetectCollider2D;
-    }
+        protected override void OnDesTroy()
+        {
+            base.OnDesTroy();
 
+            hitBox.OnDetectedCollider2D -= HandleDetectCollider2D;
+        }
+
+    }
 }

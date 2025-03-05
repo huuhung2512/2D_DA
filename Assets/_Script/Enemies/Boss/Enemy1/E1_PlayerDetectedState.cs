@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hung.CoreSystem;
 
 public class E1_PlayerDetectedState : PlayerDetectedState
 {

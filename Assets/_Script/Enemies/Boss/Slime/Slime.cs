@@ -46,14 +46,13 @@ public class Slime : Entity
 
     private void Start()
     {
-        //stateMachine.Initialize(moveState);
+        stateMachine.Initialize(moveState);
     }
 
     public void Init(SlimeCPManager _manager)
     {
         manager = _manager;
         stateMachine.Initialize(moveState);
-
     }
 
     public override void OnDrawGizmos()
@@ -75,6 +74,6 @@ public class Slime : Entity
             go.Init(manager);
             manager.AddSmallSlime(go.gameObject);
         }
-        manager.OpenSpawnSmallSlime();
+        //manager.OpenSpawnSmallSlime();
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hung.CoreSystem;
 
 public class IdleState : State
 {
@@ -9,6 +10,8 @@ public class IdleState : State
     protected bool isIdleTimeOver;
     protected float idleTime;
     protected bool isPlayerInMinArgoRange;
+    protected bool isPlayerFlyInMinArgoRange;
+    protected bool isPlayerFlyInMaxArgoRange;
 
     protected Movement Movement { get => movement ?? core.GetCoreComponent<Movement>(ref movement); }
     private Movement movement;
@@ -22,6 +25,8 @@ public class IdleState : State
     {
         base.DoChecks();
         isPlayerInMinArgoRange = entity.CheckPlayerInMinAgroRange();
+        isPlayerFlyInMinArgoRange = entity.CheckPlayerInFlyMinAgroRange();
+        isPlayerFlyInMaxArgoRange = entity.CheckPlayerInFlyMaxAgroRange();
     }
 
     public override void Enter()

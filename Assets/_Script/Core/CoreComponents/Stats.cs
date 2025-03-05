@@ -13,11 +13,8 @@ public class Stats : CoreComponent
     protected override void Awake()
     {
         base.Awake();
-
         Health?.Init();
         Poise?.Init();
-
-
     }
  
     private void Update()

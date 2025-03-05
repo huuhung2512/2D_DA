@@ -13,21 +13,22 @@ MonoBehaviour:
   m_Name: Sword_2
   m_EditorClassIdentifier: 
   <AnimationController>k__BackingField: {fileID: 9100000, guid: f71deb2fc0216c0488c2c7f1a3570ff4, type: 2}
-  <NumberOfAttacks>k__BackingField: 3
+  <NumberOfAttacks>k__BackingField: 2
   <ComponentData>k__BackingField:
-  - rid: 5964506825675243526
-  - rid: 5964506825675243528
-  - rid: 5964506847221121025
-  - rid: 5964506850404859905
-  - rid: 5964506850404859907
-  - rid: 5964506870503964672
+  - rid: 5964506942276894728
+  - rid: 5964506942276894729
+  - rid: 5964506942276894730
+  - rid: 5964506942276894731
+  - rid: 5964506942276894732
+  - rid: 5964506942276894734
   references:
     version: 2
     RefIds:
-    - rid: 5964506825675243526
-      type: {class: WeaponSpriteData, ns: , asm: Assembly-CSharp}
+    - rid: 5964506942276894728
+      type: {class: WeaponSpriteData, ns: Hung.Weapons.Components, asm: Assembly-CSharp}
       data:
         name: WeaponSpriteData
+        repeatData: 0
         attackData:
         - name: Attack 1
           <PhaseSprites>k__BackingField:
@@ -47,21 +48,11 @@ MonoBehaviour:
             - {fileID: 58691057, guid: 779be73788a1aba4a990c6802cb32510, type: 3}
             - {fileID: 1961432177, guid: 779be73788a1aba4a990c6802cb32510, type: 3}
             - {fileID: 1771912614, guid: 779be73788a1aba4a990c6802cb32510, type: 3}
-          - <Phase>k__BackingField: 0
-            <Sprites>k__BackingField: []
-        - name: Attack 3
-          <PhaseSprites>k__BackingField:
-          - <Phase>k__BackingField: 2
-            <Sprites>k__BackingField:
-            - {fileID: 749200646, guid: 779be73788a1aba4a990c6802cb32510, type: 3}
-            - {fileID: 316425727, guid: 779be73788a1aba4a990c6802cb32510, type: 3}
-            - {fileID: 88038818, guid: 779be73788a1aba4a990c6802cb32510, type: 3}
-            - {fileID: 1423219838, guid: 779be73788a1aba4a990c6802cb32510, type: 3}
-            - {fileID: 387421626, guid: 779be73788a1aba4a990c6802cb32510, type: 3}
-    - rid: 5964506825675243528
-      type: {class: MovementData, ns: , asm: Assembly-CSharp}
+    - rid: 5964506942276894729
+      type: {class: MovementData, ns: Hung.Weapons.Components, asm: Assembly-CSharp}
       data:
         name: MovementData
+        repeatData: 0
         attackData:
         - name: Attack 1
           <Direction>k__BackingField: {x: 1, y: 0}
@@ -69,74 +60,60 @@ MonoBehaviour:
         - name: Attack 2
           <Direction>k__BackingField: {x: 1, y: 0}
           <Velocity>k__BackingField: 4
-        - name: Attack 3
-          <Direction>k__BackingField: {x: 1, y: 5}
-          <Velocity>k__BackingField: 5
-    - rid: 5964506847221121025
-      type: {class: ActionHitBoxData, ns: , asm: Assembly-CSharp}
+    - rid: 5964506942276894730
+      type: {class: ActionHitBoxData, ns: Hung.Weapons.Components, asm: Assembly-CSharp}
       data:
         name: ActionHitBoxData
+        repeatData: 0
         attackData:
         - name: Attack 1
           Debug: 0
           <HitBox>k__BackingField:
             serializedVersion: 2
-            x: 0.01
-            y: -0.91
-            width: 1.93
-            height: 1.7
+            x: 0.11
+            y: -0.9
+            width: 1.94
+            height: 1.41
         - name: Attack 2
           Debug: 0
           <HitBox>k__BackingField:
             serializedVersion: 2
-            x: 0.01
-            y: -0.91
-            width: 1.93
-            height: 1.7
-        - name: Attack 3
-          Debug: 0
-          <HitBox>k__BackingField:
-            serializedVersion: 2
-            x: -0.03
-            y: -0.94
-            width: 1.7
-            height: 2.23
+            x: 0.11
+            y: -0.9
+            width: 1.94
+            height: 1.41
         <DetectableLayers>k__BackingField:
           serializedVersion: 2
           m_Bits: 256
-    - rid: 5964506850404859905
-      type: {class: DamageData, ns: , asm: Assembly-CSharp}
+    - rid: 5964506942276894731
+      type: {class: KnockBackData, ns: Hung.Weapons.Components, asm: Assembly-CSharp}
       data:
-        name: DamageData
+        name: KnockBackData
+        repeatData: 0
+        attackData:
+        - name: Attack 1
+          <Angle>k__BackingField: {x: 1, y: 1}
+          <Strength>k__BackingField: 10
+        - name: Attack 2
+          <Angle>k__BackingField: {x: 1, y: 1}
+          <Strength>k__BackingField: 15
+    - rid: 5964506942276894732
+      type: {class: PoiseDamageData, ns: Hung.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: PoiseDamageData
+        repeatData: 0
+        attackData:
+        - name: Attack 1
+          <Amount>k__BackingField: 20
+        - name: Attack 2
+          <Amount>k__BackingField: 20
+    - rid: 5964506942276894734
+      type: {class: DamageOnHitBoxActionData, ns: Hung.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: DamageOnHitBoxActionData
+        repeatData: 0
         attackData:
         - name: Attack 1
           <Amount>k__BackingField: 5
         - name: Attack 2
           <Amount>k__BackingField: 10
-        - name: Attack 3
-          <Amount>k__BackingField: 15
-    - rid: 5964506850404859907
-      type: {class: KnockBackData, ns: , asm: Assembly-CSharp}
-      data:
-        name: KnockBackData
-        attackData:
-        - name: Attack 1
-          <Angle>k__BackingField: {x: 1, y: 1}
-          <Strength>k__BackingField: 10
-        - name: Attack 2
-          <Angle>k__BackingField: {x: 1, y: 1}
-          <Strength>k__BackingField: 10
-        - name: Attack 3
-          <Angle>k__BackingField: {x: 1, y: 3}
-          <Strength>k__BackingField: 20
-    - rid: 5964506870503964672
-      type: {class: PoiseDamageData, ns: , asm: Assembly-CSharp}
-      data:
-        name: PoiseDamageData
-        attackData:
-        - name: Attack 1
-          <Amount>k__BackingField: 20
-        - name: Attack 2
-          <Amount>k__BackingField: 20
-        - name: Attack 3
-          <Amount>k__BackingField: 20

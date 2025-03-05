@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hung.CoreSystem;
 
 //Tìm kiếm player
 public class LookForPlayerState : State

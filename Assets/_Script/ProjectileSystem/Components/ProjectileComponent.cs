@@ -14,6 +14,7 @@ namespace Hung.ProjectileSystem.Components
 
         public bool Active { get; private set; }
 
+        public bool InActiveInHierarchy { get => gameObject.activeInHierarchy; }
 
         // This function is called whenever the projectile is fired, indicating the start of it's journey
         protected virtual void Init()
@@ -33,18 +34,20 @@ namespace Hung.ProjectileSystem.Components
 
         }
 
-        public virtual void SetActive(bool value) => Active = value;
+        public virtual void SetActive(bool value)
+        {
+            Active = value;
+        }
 
         public virtual void SetActiveNextFrame(bool value)
         {
-            StartCoroutine(SetActiveNextFrameCoroutine(value));
         }
-
         public IEnumerator SetActiveNextFrameCoroutine(bool value)
         {
             yield return null;
             SetActive(value);
         }
+
 
         #region Plumbing
 

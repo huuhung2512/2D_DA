@@ -1,4 +1,5 @@
-﻿using Hung.ProjectileSystem.DataPackages;
+﻿using Hung.Combat.Damage;
+using Hung.ProjectileSystem.DataPackages;
 using Hung.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
@@ -48,9 +49,9 @@ namespace Hung.ProjectileSystem.Components
                 // NOTE: We need to use .collider.transform instead of just .transform to get the GameObject the collider we detected is attached to, otherwise it returns the parent
                 if (!hit.collider.transform.gameObject.TryGetComponent(out IDamageable damageable))
                     continue;
-                
-                //damageable.Damage(new DamageData(amount, projectile.gameObject));
-                
+
+                damageable.Damage(new DamageData(amount, projectile.gameObject));
+
                 OnDamage?.Invoke(damageable);
                 OnRaycastHit?.Invoke(hit);
 
@@ -70,10 +71,10 @@ namespace Hung.ProjectileSystem.Components
         {
             base.HandleReceiveDataPackage(dataPackage);
 
-            //if (dataPackage is not DamageDataPackage package)
-            //    return;
+            if (dataPackage is not DamageDataPackage package)
+                return;
 
-            //amount = package.Amount;
+            amount = package.Amount;
         }
 
         #region Plumbing

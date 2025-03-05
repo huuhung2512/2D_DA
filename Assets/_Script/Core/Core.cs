@@ -7,8 +7,11 @@ using System.Linq;
 public class Core : MonoBehaviour
 {
     private readonly List<CoreComponent> CoreComponents = new List<CoreComponent>();
+    [field: SerializeField] public GameObject Root { get; private set; }
+
     private void Awake()
     {
+        Root = Root ? Root : transform.parent.gameObject;
     }
     public void LogicUpdate()
     {

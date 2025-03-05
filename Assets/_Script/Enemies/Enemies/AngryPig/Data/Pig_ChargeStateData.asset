@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b608fa309a8b83439cf70b92cc00539, type: 3}
   m_Name: Pig_ChargeStateData
   m_EditorClassIdentifier: 
-  chargeSpeed: 6
+  chargeSpeed: 10
   chargeTime: 2

@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: E1_MeleeAttackStateData
   m_EditorClassIdentifier: 
   attackRadius: 0.75
-  attackDamage: 5
+  attackDamage: 20
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 1024
   knockbackAngle: {x: 1, y: 1}
   knockbackStrength: 10
+  PoiseDamage: 0

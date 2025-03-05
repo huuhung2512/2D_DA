@@ -1,3 +1,4 @@
+﻿using Hung.Projectiles;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class RangedAttackState : AttackState
 {
     protected D_RangedAttackState stateData;
     protected GameObject projectile;
-    protected Projectile projectileScript;
+    protected ProjectileBase projectileScript;
     public RangedAttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosstion, D_RangedAttackState stateData) : base(entity, stateMachine, animBoolName, attackPosstion)
     {
         this.stateData = stateData;
@@ -45,8 +46,13 @@ public class RangedAttackState : AttackState
     public override void TriggerAttack()
     {
         base.TriggerAttack();
-        projectile = GameObject.Instantiate(stateData.projectile,attackPosstion.position,attackPosstion.rotation);
-        projectileScript = projectile.GetComponent<Projectile>();
-        projectileScript.FireProjectile(stateData.projectileSpeed,stateData.projectileTravelDistance,stateData.projectileDamage);
+        // Lấy projectile từ ObjectPoolManager
+        projectile = ObjectPoolManager.Instance.GetObject(stateData.projectile, attackPosstion.position, attackPosstion.rotation);
+        if (projectile != null)
+        {
+            projectileScript = projectile.GetComponent<ProjectileBase>();
+            projectileScript.Initialize(stateData.projectileDamage, stateData.projectileSpeed, Movement.FacingDirection);
+        }
     }
+
 }

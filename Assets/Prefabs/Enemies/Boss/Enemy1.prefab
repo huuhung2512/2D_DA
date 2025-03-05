@@ -633,7 +633,7 @@ GameObject:
   - component: {fileID: 5076583061697758768}
   m_Layer: 8
   m_Name: Combat
-  m_TagString: Untagged
+  m_TagString: HitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -880,6 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5897d774fe00c429e16d56aff28b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Root>k__BackingField: {fileID: 0}
 --- !u!1 &5939940043898050680
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,8 +929,8 @@ MonoBehaviour:
   <Health>k__BackingField:
     <MaxValue>k__BackingField: 100
   <Poise>k__BackingField:
-    <MaxValue>k__BackingField: 9000
-  poiseRecoveryRate: 5
+    <MaxValue>k__BackingField: 40
+  poiseRecoveryRate: 30
 --- !u!1 &5939940044195899014
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1128,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 772955549
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1644693824, guid: bbfa8db37d9d9af468fb6ab2e09f1862, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1328,7 +1329,9 @@ MonoBehaviour:
   ceilingCheck: {fileID: 0}
   groundCheckRadius: 0.3
   wallCheckDistance: 0.3
+  ledgeCheckDistance: 0
   ledgeCheckVerticalDistance: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  isGround: 0

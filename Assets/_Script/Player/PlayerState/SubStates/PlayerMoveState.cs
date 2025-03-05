@@ -17,8 +17,8 @@ public class PlayerMoveState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+        SoundManager.Instance.PlaySound(GameEnum.ESound.footStep);
     }
-
     public override void Exit()
     {
         base.Exit();
@@ -29,10 +29,7 @@ public class PlayerMoveState : PlayerGroundedState
         base.LogicUpdate();
 
         Movement?.CheckIfShouldFlip(xInput);
-
         Movement?.SetVelocityX(playerData.movementVelocity * xInput);
-
-
         if (!isExitingState)
         {
             if (xInput == 0f)

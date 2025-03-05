@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hung.CoreSystem;
 
 public class PlayerAbilityState : PlayerState
 {
@@ -31,12 +32,6 @@ public class PlayerAbilityState : PlayerState
         base.Enter();
         isAbilityDone = false;
     }
-
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -51,10 +46,5 @@ public class PlayerAbilityState : PlayerState
                 stateMachine.ChangeState(player.InAirState);
             }
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
     }
 }

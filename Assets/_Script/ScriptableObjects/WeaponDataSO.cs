@@ -1,42 +1,46 @@
+using Hung.Weapons.Components;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-
-[CreateAssetMenu(fileName = "newWeaponData", menuName = "Data/Weapon Data/Basic Weapon Data", order = 0)]
-public class WeaponDataSO : ScriptableObject
+namespace Hung.Weapons
 {
-    [field: SerializeField] public RuntimeAnimatorController AnimationController {  get;private set; }
-    [field: SerializeField] public int NumberOfAttacks { get; private set; }
-
-    [field: SerializeReference] public List<ComponentData> ComponentData { get; private set; }
-
-    public T GetData<T>()
+    [CreateAssetMenu(fileName = "newWeaponData", menuName = "Data/Weapon Data/Basic Weapon Data", order = 0)]
+    public class WeaponDataSO : ScriptableObject
     {
-        return ComponentData.OfType<T>().FirstOrDefault();
-    }
+        [field: SerializeField] public RuntimeAnimatorController AnimationController { get; private set; }
+        [field: SerializeField] public int NumberOfAttacks { get; private set; }
 
-    public List<Type> GetAllDependencies()
-    {
-        return ComponentData.Select(component => component.ComponentDependecny).ToList();
-    }
+        [field: SerializeReference] public List<ComponentData> ComponentData { get; private set; }
 
-    public void AddData(ComponentData data)
-    {
-        if (ComponentData.FirstOrDefault(t => t.GetType() == data.GetType()) != null)
+        public T GetData<T>()
         {
-            return;
+            return ComponentData.OfType<T>().FirstOrDefault();
         }
 
-        ComponentData.Add(data);
+        public List<Type> GetAllDependencies()
+        {
+            return ComponentData.Select(component => component.ComponentDependecny).ToList();
+        }
+
+        public void AddData(ComponentData data)
+        {
+            if (ComponentData.FirstOrDefault(t => t.GetType() == data.GetType()) != null)
+            {
+                return;
+            }
+
+            ComponentData.Add(data);
+        }
+
+        //[ContextMenu(itemName:"Add Sprite Data")]
+        //private void AddSpriteData() => ComponentData.Add(new WeaponSpriteData());
+
+        //[ContextMenu(itemName: "Add Movement Data")]
+        //private void AddMovementData() => ComponentData.Add(new MovementData());
+
     }
 
-    //[ContextMenu(itemName:"Add Sprite Data")]
-    //private void AddSpriteData() => ComponentData.Add(new WeaponSpriteData());
-
-    //[ContextMenu(itemName: "Add Movement Data")]
-    //private void AddMovementData() => ComponentData.Add(new MovementData());
-
 }
+

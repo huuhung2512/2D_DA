@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSpriteData : ComponentData<AttackSprites>
+namespace Hung.Weapons.Components
 {
-    protected override void SetComponentDepedency()
+    public class WeaponSpriteData : ComponentData<AttackSprites>
     {
-        ComponentDependecny = typeof(WeaponSprite);
+        protected override void SetComponentDepedency()
+        {
+            ComponentDependecny = typeof(WeaponSprite);
+        }
     }
 }
+

@@ -1,6 +1,10 @@
+using Hung.ObjectPoolSystem;
 using Hung.Utilities;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Hung.ProjectileSystem.Components
 {
@@ -27,6 +31,7 @@ namespace Hung.ProjectileSystem.Components
         private bool subscribedToDisableNotifier;
 
         private HitBox hitBox;
+        private ObjectPoolItem poolItem;
 
         private string activeSortingLayerName;
 
@@ -152,8 +157,9 @@ namespace Hung.ProjectileSystem.Components
             activeSortingLayerName = sr.sortingLayerName;
 
             hitBox = GetComponent<HitBox>();
-
+            poolItem = GetComponent<ObjectPoolItem>();
             hitBox.OnRaycastHit2D.AddListener(HandleRaycastHit2D);
+
         }
 
         protected override void Update()
@@ -186,6 +192,21 @@ namespace Hung.ProjectileSystem.Components
                 onDisableNotifier.OnDisableEvent -= HandleDisableNotifier;
             }
         }
+
+
+        public void ReturnItem(int value)
+        {
+            if (gameObject.activeInHierarchy)
+                poolItem.ReturnItem(value);
+        }
+
+        public override void SetActiveNextFrame(bool value)
+        {
+            base.SetActiveNextFrame(value);
+            if (gameObject.activeInHierarchy)
+                StartCoroutine(SetActiveNextFrameCoroutine(value));
+        }
+
 
         #endregion
     }

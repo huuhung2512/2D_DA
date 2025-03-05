@@ -676,6 +676,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  isGround: 0
 --- !u!1 &5348448254223639883
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +825,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 772955549
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 975105254, guid: 53ebe1c612511bd43added33f6372f28, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1030,7 +1031,7 @@ GameObject:
   - component: {fileID: 3934700287266665347}
   m_Layer: 8
   m_Name: Combat
-  m_TagString: Untagged
+  m_TagString: HitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1241,6 +1242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5897d774fe00c429e16d56aff28b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Root>k__BackingField: {fileID: 0}
 --- !u!1 &5348448254765800715
 GameObject:
   m_ObjectHideFlags: 0

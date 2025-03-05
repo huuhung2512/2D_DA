@@ -31,6 +31,7 @@ public class PlayerDashState : PlayerAbilityState
         Time.timeScale = playerData.holdTimeScale;
         startTime = Time.unscaledTime;
         player.DashDirectionIndicator.gameObject.SetActive(true);
+
     }
 
     public override void Exit()
@@ -76,6 +77,7 @@ public class PlayerDashState : PlayerAbilityState
                     Movement?.SetVelocity(playerData.dashVelocity, dashDirection);
                     player.DashDirectionIndicator.gameObject.SetActive(false);
                     PlaceAfterImage();
+                    SoundManager.Instance.PlaySound(GameEnum.ESound.dashSound);
                 }
             }
             else

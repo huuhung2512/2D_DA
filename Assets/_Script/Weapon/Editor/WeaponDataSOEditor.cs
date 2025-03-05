@@ -1,3 +1,5 @@
+using Hung.Weapons;
+using Hung.Weapons.Components;
 using System;
 using System.Collections;
 using System.Collections.Generic;

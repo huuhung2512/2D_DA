@@ -7,6 +7,11 @@ TagManager:
   - Enemy
   - ParticleContainer
   - Ground
+  - Trap
+  - DeathZone
+  - HitBox
+  - NPC
+  - RockHead
   layers:
   - Default
   - TransparentFX
@@ -20,7 +25,7 @@ TagManager:
   - Dead
   - Player
   - Weapon
-  - 
+  - Platform
   - 
   - 
   - 
@@ -47,8 +52,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Decoration
-    uniqueID: 173532223
+  - name: Terrain
+    uniqueID: 549417441
     locked: 0
   - name: InactiveProjectile
     uniqueID: 3545352561
@@ -58,9 +63,6 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 136112083
-    locked: 0
-  - name: Hide Player
-    uniqueID: 3783030291
     locked: 0
   - name: ActiveProjectile
     uniqueID: 2254714517

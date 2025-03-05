@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 3002853998596136478}
   m_Layer: 8
   m_Name: Combat
-  m_TagString: Untagged
+  m_TagString: HitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -827,7 +827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3002853998891481564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: -0.21, z: 0}
+  m_LocalPosition: {x: 0.359, y: -0.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -884,6 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5897d774fe00c429e16d56aff28b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Root>k__BackingField: {fileID: 0}
 --- !u!1 &3002853998975891464
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +994,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3002853999271652605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.481264, y: -5.31, z: -0.12535962}
+  m_LocalPosition: {x: 31.562, y: -5.31, z: -0.12535962}
   m_LocalScale: {x: 0.65, y: 0.65, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1042,7 +1043,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 772955549
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -50661633, guid: bf62014a71df499419b74aef781a67c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1214,6 +1215,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  isGround: 0
 --- !u!1 &6691557851525555834
 GameObject:
   m_ObjectHideFlags: 0

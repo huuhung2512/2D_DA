@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Hung.CoreSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

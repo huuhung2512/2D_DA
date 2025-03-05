@@ -1,3 +1,7 @@
+﻿using Hung.Combat.Damage;
+using Hung.Combat.KnockBack;
+using Hung.CoreSystem;
+using Hung.Weapons;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -38,9 +42,10 @@ public class Player : MonoBehaviour
     public Rigidbody2D RB { get; private set; }
     public Transform DashDirectionIndicator { get; private set; }
     public BoxCollider2D MovementCollider { get; private set; }
+    private Movement Movement { get => movement ?? Core.GetCoreComponent<Movement>(ref movement); }
+    private Movement movement;
     private CollisionSenses CollisionSenses { get => collisionSenses ?? Core.GetCoreComponent<CollisionSenses>(ref collisionSenses); }
     private CollisionSenses collisionSenses;
-
     #endregion
 
     #region Other Variable
@@ -86,20 +91,12 @@ public class Player : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
         DashDirectionIndicator = transform.Find("DashDirectionIndicator");
         MovementCollider = GetComponent<BoxCollider2D>();
-
         StateMachine.Initialize(IdleState);
     }
     private void Update()
     {
         Core.LogicUpdate();
         StateMachine.CurrentState.LogicUpdate();
-        if (InputHandler.FlyInput)
-        {
-            Debug.Log("Flying");
-            //projectile = GameObject.Instantiate(playerData.projectile, bow.position, bow.rotation);
-            //projectileScript = projectile.GetComponent<Projectile>();
-            //projectileScript.FireProjectile(playerData.projectileSpeed, playerData.projectileTravelDistance, playerData.projectileDamage);
-        }
     }
     private void FixedUpdate()
     {
@@ -118,6 +115,40 @@ public class Player : MonoBehaviour
         MovementCollider.size = workSpace;
         MovementCollider.offset = center;
     }
+
+    //Va cham voi trap
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Trap") || other.gameObject.CompareTag("RockHead") || (other.gameObject.CompareTag("Enemy"))) // Kiểm tra nếu Player chạm vào hitbox
+        {
+            IDamageable damageable = Core.GetComponentInChildren<IDamageable>();
+            damageable.Damage(new DamageData(10, Core.Root));
+            IKnockBackable kn = Core.GetComponentInChildren<IKnockBackable>();
+            kn.KnockBack(new KnockBackData(new Vector2(1, 1), 20, Movement.FacingDirection, Core.Root));
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Trap")) // Kiểm tra nếu Player chạm vào hitbox
+        {
+            IDamageable damageable = Core.GetComponentInChildren<IDamageable>();
+            damageable.Damage(new DamageData(10, Core.Root));
+            IKnockBackable kn = Core.GetComponentInChildren<IKnockBackable>();
+            kn.KnockBack(new KnockBackData(new Vector2(1, 1), 20, -Movement.FacingDirection, Core.Root));
+        }
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Trap")) // Kiểm tra nếu Player chạm vào hitbox
+        {
+            IDamageable damageable = Core.GetComponentInChildren<IDamageable>();
+            damageable.Damage(new DamageData(2, Core.Root));
+            IKnockBackable kn = Core.GetComponentInChildren<IKnockBackable>();
+            kn.KnockBack(new KnockBackData(new Vector2(1, 1), 20, -Movement.FacingDirection, Core.Root));
+        }
+    }
+
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
     private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
     private void OnDrawGizmos()

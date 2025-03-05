@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class InputHoldData : ComponentData
+namespace Hung.Weapons.Components
 {
-    protected override void SetComponentDepedency()
+    public class InputHoldData : ComponentData
     {
-        ComponentDependecny = typeof(InputHold);
+        protected override void SetComponentDepedency()
+        {
+            ComponentDependecny = typeof(InputHold);
+        }
     }
+
 }

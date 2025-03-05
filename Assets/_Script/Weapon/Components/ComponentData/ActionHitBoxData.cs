@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ActionHitBoxData : ComponentData<AttackActionHitBox>
+namespace Hung.Weapons.Components
 {
-    [field : SerializeField ] public LayerMask DetectableLayers { get; private set; }
-
-    protected override void SetComponentDepedency()
+    public class ActionHitBoxData : ComponentData<AttackActionHitBox>
     {
-        ComponentDependecny = typeof(ActionHitbox);
+        [field: SerializeField] public LayerMask DetectableLayers { get; private set; }
+
+        protected override void SetComponentDepedency()
+        {
+            ComponentDependecny = typeof(ActionHitbox);
+        }
     }
 }
+

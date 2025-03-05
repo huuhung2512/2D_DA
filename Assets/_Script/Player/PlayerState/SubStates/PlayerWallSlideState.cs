@@ -21,9 +21,5 @@ public class PlayerWallSlideState : PlayerTouchingWallState
                 stateMachine.ChangeState(player.WallGrabState);
             }
         }
-        //else if(!grabInput && yInput == 0 && xInput == 0) {
-        
-        //    stateMachine.ChangeState(player.InAirState);
-        //}
     }
 }

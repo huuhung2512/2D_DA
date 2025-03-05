@@ -1,7 +1,6 @@
-using Hung.ProjectileSystem.Components;
 using UnityEngine;
 using Hung.Utilities;
-namespace Bardent.ProjectileSystem.Components
+namespace Hung.ProjectileSystem.Components
 {
     /// <summary>
     /// DelayedGravity sets the projectiles initial gravity to zero and then sets it to some value after some distance has been travelled.

@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hung.CoreSystem;
 
 public class AttackState : State
 {
     protected Transform attackPosstion;
     protected bool isAnimationFinished;
     protected bool isPlayerInMinAgroRange;
+
+
+    protected bool isPlayerInFlyMinArgoRange;
     protected Movement Movement { get => movement ?? core.GetCoreComponent<Movement>(ref movement); }
     private Movement movement;
     private CollisionSenses CollisionSenses { get => collisionSenses ?? core.GetCoreComponent<CollisionSenses>(ref collisionSenses); }
@@ -20,6 +24,7 @@ public class AttackState : State
     {
         base.DoChecks();
         isPlayerInMinAgroRange = entity.CheckPlayerInMinAgroRange();
+        isPlayerInFlyMinArgoRange = entity.CheckPlayerInFlyMinAgroRange();
     }
 
     public override void Enter()
@@ -47,7 +52,6 @@ public class AttackState : State
     }
     public virtual void TriggerAttack()
     {
-
     }
     public virtual void FinishAttack()
     {

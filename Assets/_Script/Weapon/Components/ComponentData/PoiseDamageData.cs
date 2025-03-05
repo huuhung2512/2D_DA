@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PoiseDamageData : ComponentData<AttackPoiseDamage>
+namespace Hung.Weapons.Components
 {
-    protected override void SetComponentDepedency()
+    public class PoiseDamageData : ComponentData<AttackPoiseDamage>
     {
-        ComponentDependecny = typeof(PoiseDamage);
+        protected override void SetComponentDepedency()
+        {
+            ComponentDependecny = typeof(PoiseDamage);
+        }
     }
+
 }

@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MovementData : ComponentData<AttackMovement>
+namespace Hung.Weapons.Components
 {
-    protected override void SetComponentDepedency()
+    public class MovementData : ComponentData<AttackMovement>
     {
-        ComponentDependecny = typeof(MovementAttack);
+        protected override void SetComponentDepedency()
+        {
+            ComponentDependecny = typeof(MovementAttack);
+        }
     }
 }
+

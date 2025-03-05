@@ -2,59 +2,67 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[Serializable]
-public abstract class ComponentData
+namespace Hung.Weapons.Components
 {
-    [SerializeField, HideInInspector] private string name;
-    public Type ComponentDependecny { get; protected set; }
-
-    public ComponentData()
+    [Serializable]
+    public abstract class ComponentData
     {
-        SetComponentName();
-        SetComponentDepedency();
-    }
+        [SerializeField, HideInInspector] private string name;
+        public Type ComponentDependecny { get; protected set; }
 
-    public void SetComponentName() => name = GetType().Name;
-
-    protected abstract void SetComponentDepedency();
-    public virtual void SetAttackDataName() { }
-    public virtual void InitializeAttackData(int numberOfAttack) { }
-}
-[Serializable]
-public abstract class ComponentData<T> : ComponentData where T : AttackData
-{
-    [SerializeField] private T[] attackData;
-    public T[] AttackData { get => attackData; private set => attackData = value; }
-
-    public override void SetAttackDataName()
-    {
-        base.SetAttackDataName();
-        for (var i = 0; i < AttackData.Length; i++)
+        public ComponentData()
         {
-            AttackData[i].SetAttackName(i + 1);
-        }
-    }
-    public override void InitializeAttackData(int numberOfAttack)
-    {
-        base.InitializeAttackData(numberOfAttack);
-
-        var oldLen = attackData != null ? AttackData.Length : 0;
-
-        if (oldLen == numberOfAttack)
-        {
-            return;
+            SetComponentName();
+            SetComponentDepedency();
         }
 
-        Array.Resize(ref attackData, numberOfAttack);
-        if (oldLen < numberOfAttack)
+        public void SetComponentName() => name = GetType().Name;
+
+        protected abstract void SetComponentDepedency();
+        public virtual void SetAttackDataName() { }
+        public virtual void InitializeAttackData(int numberOfAttack) { }
+    }
+    [Serializable]
+    public abstract class ComponentData<T> : ComponentData where T : AttackData
+    {
+        // True if component data is the same for every attack, avoiding the issue of having to set up repeat data
+        [SerializeField] private bool repeatData;
+        [SerializeField] private T[] attackData;
+        // Use this to get the data of a specific attack. Accounts for components that repeats data for all attacks.
+        public T GetAttackData(int index) => attackData[repeatData ? 0 : index];
+        public T[] GetAllAttackData() => attackData;
+        public override void SetAttackDataName()
         {
-            for (var i = oldLen; i < attackData.Length; i++)
+            base.SetAttackDataName();
+
+            for (var i = 0; i < attackData.Length; i++)
             {
-                var newObj = Activator.CreateInstance(typeof(T)) as T;
-                attackData[i] = newObj;
+                attackData[i].SetAttackName(i + 1);
             }
         }
-        SetAttackDataName();
+        public override void InitializeAttackData(int numberOfAttacks)
+        {
+            base.InitializeAttackData(numberOfAttacks);
+
+            var newLen = repeatData ? 1 : numberOfAttacks;
+
+            var oldLen = attackData != null ? attackData.Length : 0;
+
+            if (oldLen == newLen)
+                return;
+
+            Array.Resize(ref attackData, newLen);
+
+            if (oldLen < newLen)
+            {
+                for (var i = oldLen; i < attackData.Length; i++)
+                {
+                    var newObj = Activator.CreateInstance(typeof(T)) as T;
+                    attackData[i] = newObj;
+                }
+            }
+
+            SetAttackDataName();
+        }
     }
 }

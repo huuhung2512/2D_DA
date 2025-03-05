@@ -146,7 +146,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void UseJumpInput() => JumpInput = false;
     public void UseDashInput() => DashInput = false;
-
+    public void UseAttackInput(int i) => AttackInputs[i] = false;
     private void CheckDashInputHoldTime()
     {
         if (Time.time >= dashInputStartTime + inputHoldTime)

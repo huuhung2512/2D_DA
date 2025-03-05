@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   movementVelocity: 10
-  jumpVelocity: 25
+  jumpVelocity: 30
   amountOfJump: 1
   wallJumpVelocity: 25
   wallJumpTime: 0.4
@@ -22,9 +22,9 @@ MonoBehaviour:
   coyoteTime: 0.2
   variableJumpHeightMultiplier: 0.5
   wallSlideVelocity: 2
-  wallClimbVelocity: 10
+  wallClimbVelocity: 5
   startOffSet: {x: 0.4, y: 0.9}
-  stopOffset: {x: 0.45, y: 0.75}
+  stopOffset: {x: 0.4, y: 0.85}
   dashCoolDown: 0.5
   maxHoldTime: 1
   holdTimeScale: 0.25

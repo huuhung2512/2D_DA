@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hung.CoreSystem;
 
 public class PlayerInAirState : PlayerState
 {
@@ -49,8 +50,6 @@ public class PlayerInAirState : PlayerState
             isTouchingLedge = CollisionSenses.LedgeHorizontal;
         }
 
-
-
         if (isTouchingWall && !isTouchingLedge)
         {
             player.LedgeClimbState.SetDetectedPosition(player.transform.position);
@@ -92,26 +91,23 @@ public class PlayerInAirState : PlayerState
 
         CheckJumpMultiplier();
 
-        //tan cong
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary])
+
+        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && player.PrimaryAttackState.CanTransitionToAttackState())
         {
             stateMachine.ChangeState(player.PrimaryAttackState);
         }
-        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary])
+        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && player.SecondaryAttackState.CanTransitionToAttackState())
         {
             stateMachine.ChangeState(player.SecondaryAttackState);
         }
-        //cham dat
         else if (isGrounded && Movement?.CurrentVelocity.y < 0.01f)
         {
             stateMachine.ChangeState(player.LandState);
         }
-        //leo tuong
         else if (isTouchingWall && !isTouchingLedge && !isGrounded)
         {
             stateMachine.ChangeState(player.LedgeClimbState);
         }
-        //nhay tuong
         else if (JumpInput && (isTouchingWall || isTouchingWallBack || wallJumpCoyoteTime))
         {
             StopWallJumpCoyoteTime();
@@ -119,22 +115,18 @@ public class PlayerInAirState : PlayerState
             player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
             stateMachine.ChangeState(player.WallJumpState);
         }
-        //nhay
         else if (JumpInput && player.JumpState.CanJump())
         {
             stateMachine.ChangeState(player.JumpState);
         }
-        //bam tuong
         else if (isTouchingWall && grabInput && isTouchingLedge)
         {
             stateMachine.ChangeState(player.WallGrabState);
         }
-        //truot tuong
-        else if (isTouchingWall && xInput == Movement?.FacingDirection && Movement?.CurrentVelocity.y <= 0f)
+        else if (isTouchingWall && xInput == Movement?.FacingDirection && Movement?.CurrentVelocity.y <= 0)
         {
             stateMachine.ChangeState(player.WallSlideState);
         }
-        //dash
         else if (dashInput && player.DashState.CheckIfCanDash())
         {
             stateMachine.ChangeState(player.DashState);
@@ -147,7 +139,6 @@ public class PlayerInAirState : PlayerState
             player.Anim.SetFloat("xVelocity", Mathf.Abs(Movement.CurrentVelocity.x));
         }
     }
-
 
 
     private void CheckJumpMultiplier()

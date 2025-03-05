@@ -3,8 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class AttackPoiseDamage : AttackData
+namespace Hung.Weapons.Components
 {
-    [field: SerializeField] public float Amount { get; private set; }
+    [Serializable]
+    public class AttackPoiseDamage : AttackData
+    {
+        [field: SerializeField] public float Amount { get; private set; }
+    }
 }
+
+

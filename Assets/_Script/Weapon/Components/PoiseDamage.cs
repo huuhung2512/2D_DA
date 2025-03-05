@@ -1,35 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Hung.Combat.PoiseDamage;
 
-public class PoiseDamage : WeaponComponent<PoiseDamageData, AttackPoiseDamage>
+namespace Hung.Weapons.Components
 {
-
-    private ActionHitbox hitBox;
-
-    private void HandleDetectCollider2D(Collider2D[] colliders)
+    public class PoiseDamage : WeaponComponent<PoiseDamageData, AttackPoiseDamage>
     {
-        foreach (var item in colliders)
+
+        private ActionHitbox hitBox;
+
+        private void HandleDetectCollider2D(Collider2D[] colliders)
         {
-            if(item.TryGetComponent(out IPoiseDamageable poiseDamageable))
+            foreach (var item in colliders)
             {
-                poiseDamageable.DamagePoise(currentAttackData.Amount);
+                if (item.TryGetComponent(out IPoiseDamageable poiseDamageable))
+                {
+                    poiseDamageable.DamagePoise(new Combat.PoiseDamage.PoiseDamageData(currentAttackData.Amount, Core.Root));
+                }
             }
         }
-    }
 
-    protected override void Start()
-    {
-        base.Start();
+        protected override void Start()
+        {
+            base.Start();
 
-        hitBox = GetComponent<ActionHitbox>();
-        hitBox.OnDetectedCollider2D += HandleDetectCollider2D;
-    }
-    protected override void OnDesTroy()
-    {
-        base.OnDesTroy();
+            hitBox = GetComponent<ActionHitbox>();
+            hitBox.OnDetectedCollider2D += HandleDetectCollider2D;
+        }
+        protected override void OnDesTroy()
+        {
+            base.OnDesTroy();
 
-        hitBox.OnDetectedCollider2D -= HandleDetectCollider2D;
+            hitBox.OnDetectedCollider2D -= HandleDetectCollider2D;
+        }
+
     }
 
 }

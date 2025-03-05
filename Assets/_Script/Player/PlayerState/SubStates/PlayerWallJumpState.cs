@@ -17,6 +17,7 @@ public class PlayerWallJumpState : PlayerAbilityState
         Movement?.SetVelocity(playerData.wallJumpVelocity, playerData.wallJumpAngle, wallJumpDirection);
         Movement?.CheckIfShouldFlip(wallJumpDirection);
         player.JumpState.DecreaseAmountOfJumpLeft();
+        SoundManager.Instance.PlaySound(GameEnum.ESound.jump);
     }
 
     public override void LogicUpdate()
