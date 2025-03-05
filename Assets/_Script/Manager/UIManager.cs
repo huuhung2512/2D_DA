@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameMenuLevelPanel;
     [SerializeField] private GameObject gameSettingPanel;
     [SerializeField] private GameObject gamePausePanel;
-    [SerializeField] private GameObject background;
 
     // Text Components
     [Header("Text Components")]
@@ -63,7 +62,6 @@ public class UIManager : MonoBehaviour
     {
         HideAllUI();
         gameStartPanel.SetActive(true);
-        background.SetActive(true);
     }
 
     public void ShowGameHubUI()
@@ -108,13 +106,6 @@ public class UIManager : MonoBehaviour
         gamePausePanel.SetActive(false);
         gameHubPanel.SetActive(false );
     }
-
-    // Ẩn background
-    public void HideBackGround()
-    {
-        background.SetActive(false);
-    }
-
     // Cập nhật UI game over
     private void UpdateGameOverUI()
     {

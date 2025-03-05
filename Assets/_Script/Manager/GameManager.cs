@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         // Nếu nhấn phím Escape
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().buildIndex != 0)
         {
             if (IsPaused)
             {
@@ -100,7 +100,6 @@ public class GameManager : MonoBehaviour
         SaveScore();
         SceneManager.LoadScene(level);
         UIManager.Instance.HideAllUI();
-        UIManager.Instance.HideBackGround();
         UIManager.Instance.ShowGameHubUI();
         SoundManager.Instance.PlayMusic((GameEnum.EMusic)1);
     }
@@ -180,11 +179,9 @@ public class GameManager : MonoBehaviour
         {
             ResumeGame();
         }
-
         SceneManager.LoadScene(0);
         SoundManager.Instance.PlayMusic(GameEnum.EMusic.MusicIndex);
         UIManager.Instance.HideAllUI();
         UIManager.Instance.ShowGameStartUI();
-
     }
 }
