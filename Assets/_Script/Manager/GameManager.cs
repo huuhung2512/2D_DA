@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour
 
             // Hiển thị UI pause
             UIManager.Instance.ShowPauseUI();
-
         }
     }
 

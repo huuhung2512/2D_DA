@@ -12502,27 +12502,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550036169280, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550036169280, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550036169280, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -838.9031
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550679260338, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550679260338, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550679260338, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -838.9031
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551166696103, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_Size.x
@@ -12590,7 +12590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551166696105, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: text.Array.data[0]
-      value: "Haha th\u1EB1ng ngu m tin ng vcl"
+      value: "Haha m\xE0y tin ng vcl"
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551166696105, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: text.Array.data[1]
@@ -12599,7 +12599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551166696105, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: text.Array.data[2]
-      value: "T\xECm c\xE1ch leo l\xEAn \u0111i g\u1EE3i \xFD cho m \"Ctrl\" nh\xE9"
+      value: "T\xECm c\xE1ch leo l\xEAn \u0111i "
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551166696105, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: _listTransform.Array.data[0].Target
@@ -12612,6 +12612,10 @@ PrefabInstance:
     - target: {fileID: 1634016551166696106, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_Name
       value: Ghost (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634016551166696106, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551169778316, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_fontSize
@@ -20018,11 +20022,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 817059737}
-  - component: {fileID: 817059738}
+  - component: {fileID: 817059741}
   - component: {fileID: 817059735}
+  - component: {fileID: 817059738}
   - component: {fileID: 817059743}
   - component: {fileID: 817059742}
-  - component: {fileID: 817059741}
   - component: {fileID: 817059740}
   - component: {fileID: 817059739}
   m_Layer: 10
@@ -59856,27 +59860,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550036169280, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550036169280, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550036169280, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -838.9031
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550679260338, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550679260338, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634016550679260338, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -838.9031
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634016551166696103, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
+      propertyPath: m_Size.x
+      value: 8.873318
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634016551166696103, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
+      propertyPath: m_Size.y
+      value: 4.095593
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634016551166696103, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
+      propertyPath: m_Offset.x
+      value: -5.343199
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634016551166696103, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.110297
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551166696104, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_RootOrder
@@ -59884,11 +59904,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551166696104, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.99
+      value: 49.07
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551166696104, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.18
+      value: 11.1
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551166696104, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_LocalPosition.z
@@ -59923,12 +59943,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551166696105, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
+      propertyPath: text.Array.data[1]
+      value: "M\xE0y \u0111\xE3 d\xE0nh bi\u1EBFt bao th\u1EDDi gian \u0111\u1EC3
+        t\u1EA1o ra th\u1EBF gi\u1EDBi n\xE0y, "
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634016551166696105, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
+      propertyPath: text.Array.data[2]
+      value: "Nh\u01B0ng l\u1EA1i mu\u1ED1n b\u1ECF m\u1EB7c n\xF3 dang d\u1EDF?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634016551166696105, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
+      propertyPath: text.Array.data[3]
+      value: "Li\u1EC7u m\xE0y c\xF3 \u0111\u1EE7 s\u1EE9c \u0111\u1EC3 \u0111i h\u1EBFt
+        con \u0111\u01B0\u1EDDng m\xECnh \u0111\xE3 t\u1EA1o ra"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634016551166696105, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
+      propertyPath: text.Array.data[5]
+      value: "Mu\u1ED1n quay l\u1EA1i th\u1EF1c t\u1EA1i, h\xE3y ch\u1EE9ng minh
+        r\u1EB1ng tr\xF2 ch\u01A1i n\xE0y x\u1EE9ng \u0111\xE1ng \u0111\u01B0\u1EE3c
+        ho\xE0n th\xE0nh"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634016551166696105, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: _listTransform.Array.data[0].Target
       value: 
       objectReference: {fileID: 372738890}
     - target: {fileID: 1634016551166696106, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_Name
       value: Ghost
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634016551166696106, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1634016551169778316, guid: 662d326d3adb1f14986162f6f398d395, type: 3}
       propertyPath: m_fontSize

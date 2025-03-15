@@ -52,6 +52,12 @@ public class Player : MonoBehaviour
     private Vector2 workSpace;
     private Weapon primaryWeapon;
     private Weapon secondaryWeapon;
+
+
+    //private Vector3 originalScale;
+
+    private float baseSpeed;    // Tốc độ cơ bản từ playerData
+    private float currentSpeed; // Tốc độ hiện tại (có thể thay đổi bởi item)
     #endregion
 
     #region Unity CallBack Function
@@ -92,6 +98,11 @@ public class Player : MonoBehaviour
         DashDirectionIndicator = transform.Find("DashDirectionIndicator");
         MovementCollider = GetComponent<BoxCollider2D>();
         StateMachine.Initialize(IdleState);
+
+        //originalScale = transform.localScale;
+
+        baseSpeed = playerData.movementVelocity; // Lưu tốc độ cơ bản
+        currentSpeed = baseSpeed;                // Khởi tạo tốc độ hiện tại
     }
     private void Update()
     {
@@ -148,7 +159,6 @@ public class Player : MonoBehaviour
             kn.KnockBack(new KnockBackData(new Vector2(1, 1), 20, -Movement.FacingDirection, Core.Root));
         }
     }
-
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
     private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
     private void OnDrawGizmos()
@@ -161,6 +171,88 @@ public class Player : MonoBehaviour
             Gizmos.DrawLine(CollisionSenses.LedgeCheckHorizontal.position, new Vector3(CollisionSenses.LedgeCheckHorizontal.position.x + CollisionSenses.WallCheckDistance, CollisionSenses.LedgeCheckHorizontal.position.y, CollisionSenses.LedgeCheckHorizontal.position.z));
         }
     }
+    #endregion
 
+    #region tang hinh player
+    public void ActivateInvisibility(SpriteRenderer renderer, float duration)
+    {
+        StartCoroutine(ApplyInvisibility(renderer, duration));
+    }
+
+    private IEnumerator ApplyInvisibility(SpriteRenderer playerRenderer, float invisibilityDuration)
+    {
+        Color originalColor = playerRenderer.color;
+        Color invisibleColor = originalColor;
+        invisibleColor.a = 0.2f; // Gần như trong suốt
+        playerRenderer.color = invisibleColor;
+        // Chờ thời gian tàng hình
+        yield return new WaitForSeconds(invisibilityDuration);
+        // Khôi phục màu ban đầu
+        playerRenderer.color = originalColor;
+    }
+    #endregion
+
+    #region phong to / thu nho
+    //public void ActivateSizeChange(float scaleFactor, float duration, bool enlarge)
+    //{
+    //    StartCoroutine(ApplySizeChange(scaleFactor, duration, enlarge));
+    //}
+
+    //private IEnumerator ApplySizeChange(float scaleFactor, float duration, bool enlarge)
+    //{
+    //    // Tính toán kích thước mới
+    //    Vector3 newScale = originalScale;
+    //    if (enlarge)
+    //    {
+    //        newScale *= scaleFactor; // Phóng to
+    //        Debug.Log("Player phóng to lên " + scaleFactor + " lần trong " + duration + " giây");
+    //    }
+    //    else
+    //    {
+    //        newScale /= scaleFactor; // Thu nhỏ
+    //        Debug.Log("Player thu nhỏ xuống " + (1 / scaleFactor) + " lần trong " + duration + " giây");
+    //    }
+
+    //    // Áp dụng kích thước mới
+    //    transform.localScale = newScale;
+
+    //    // Chờ thời gian hiệu ứng
+    //    yield return new WaitForSeconds(duration);
+
+    //    // Khôi phục kích thước ban đầu
+    //    transform.localScale = originalScale;
+    //    Debug.Log("Kích thước player đã trở lại bình thường");
+    //}
+    #endregion
+
+    #region Thay đổi tốc độ
+    public void ActivateSpeedChange(float speedMultiplier, float duration, bool speedUp)
+    {
+        StartCoroutine(ApplySpeedChange(speedMultiplier, duration, speedUp));
+    }
+
+    private IEnumerator ApplySpeedChange(float speedMultiplier, float duration, bool speedUp)
+    {
+        // Tính toán tốc độ mới
+        if (speedUp)
+        {
+            currentSpeed = baseSpeed * speedMultiplier; // Tăng tốc
+        }
+        else
+        {
+            currentSpeed = baseSpeed / speedMultiplier; // Giảm tốc
+        }
+
+        // Cập nhật tốc độ trong playerData
+        playerData.movementVelocity = currentSpeed;
+
+        // Chờ thời gian hiệu ứng
+        yield return new WaitForSeconds(duration);
+
+        // Khôi phục tốc độ ban đầu
+        playerData.movementVelocity = baseSpeed;
+        currentSpeed = baseSpeed;
+    }
+   
     #endregion
 }
