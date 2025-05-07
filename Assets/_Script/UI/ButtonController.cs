@@ -77,5 +77,6 @@ public class ButtonController : MonoBehaviour
     {
         PlaySfx();
         GameManager.Instance.ReturnMainMenu();
+        GameManager.Instance.ResetScore();
     }
 }

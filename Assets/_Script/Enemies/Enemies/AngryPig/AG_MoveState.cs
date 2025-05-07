@@ -18,7 +18,7 @@ public class AG_MoveState : MoveState
             stateMachine.ChangeState(pig.chargeState);
         }
         // n?u k? thù ch?m t??ng ho?c không ? trên m?t ??t thì chuy?n tr?ng thái idle
-        else if (isDetectingWall || !isDetectingLedge)
+        else if (isDetectingWall || !isDetectingLedge )
         {
             pig.idleState.SetFlipAfterIdle(true);
             stateMachine.ChangeState(pig.idleState);

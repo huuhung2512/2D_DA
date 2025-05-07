@@ -159,6 +159,12 @@ public class Player : MonoBehaviour
             kn.KnockBack(new KnockBackData(new Vector2(1, 1), 20, -Movement.FacingDirection, Core.Root));
         }
     }
+    public void Respawn(Vector3 position)
+    {
+        transform.position = position;
+        gameObject.SetActive(true);
+    }
+
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
     private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
     private void OnDrawGizmos()

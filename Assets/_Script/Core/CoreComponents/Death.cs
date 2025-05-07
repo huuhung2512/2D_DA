@@ -47,15 +47,11 @@ public class Death : CoreComponent
             {
                 core.transform.parent.gameObject.SetActive(false);
                 GameManager.Instance.PlayerDie();
-
-            }
-            else
-            {
-                Debug.LogError("GameManager.Instance is null!");
             }
         }
         else
         {
+            //Quest.Instance.EnemyKilled();
             Destroy(core.transform.parent.gameObject); // Nếu là enemy, chỉ destroy
         }
     }

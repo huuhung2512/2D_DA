@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,7 +54,7 @@ public class PlayerDashState : PlayerAbilityState
 
             if (isHolding)
             {
-                dashDirectionInput = player.InputHandler.RawDashDirectionInput;
+                dashDirectionInput = player.InputHandler.DashDirectionInput;
                 dashInputStop = player.InputHandler.DashInputStop;
                 if (dashDirectionInput != Vector2.zero)
                 {

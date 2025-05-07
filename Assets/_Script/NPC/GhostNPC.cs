@@ -20,6 +20,8 @@ public class GhostNPC : NPC
     [SerializeField] private float _timeLoadText = .05f;
     private IEnumerator _coroutine;
 
+
+
     [System.Serializable]
     public class TargetStory
     {
@@ -99,7 +101,13 @@ public class GhostNPC : NPC
         _coroutine = DisplayText(text[currentIndex]);
         StartCoroutine(_coroutine);
         currentIndex++;
-        Debug.Log("Ghost: Hello Bro!!!");
+
+        // Kích hoạt nhiệm vụ khi đến hội thoại mong muốn
+        //if (currentIndex == 3) // Chỉnh số này theo đoạn hội thoại muốn kích hoạt
+        //{
+        //    Quest.Instance.ActivateQuest();
+        //}
+
         Invoke("Show_Notification", 1f);
     }
 

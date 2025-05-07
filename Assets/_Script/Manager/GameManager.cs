@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     // Biến để theo dõi trạng thái pause
     public bool IsPaused { get; private set; } = false;
 
+
+    private Vector3 lastCheckpointPosition = Vector3.zero;
+    private bool hasCheckpoint = false;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -46,16 +50,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+
     // Phương thức pause game
     public void PauseGame()
     {
         if (!IsPaused)
         {
-            // Dừng thời gian trong game
             Time.timeScale = 0f;
             IsPaused = true;
-
-            // Hiển thị UI pause
             UIManager.Instance.ShowPauseUI();
         }
     }
@@ -65,13 +68,10 @@ public class GameManager : MonoBehaviour
     {
         if (IsPaused)
         {
-            // Tiếp tục thời gian trong game
             Time.timeScale = 1f;
             IsPaused = false;
-            // Ẩn UI pause
             UIManager.Instance.HideAllUI();
             UIManager.Instance.ShowGameHubUI();
-
         }
     }
 
@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
 #if UNITY_EDITOR
-        // Nếu đang chạy trong Unity Editor
         UnityEditor.EditorApplication.isPlaying = false;
 #else
             // Nếu đang chạy trên thiết bị thực
@@ -90,7 +89,6 @@ public class GameManager : MonoBehaviour
     // Các phương thức khác như cũ
     public void LoadLevel(int level)
     {
-        // Reset trạng thái pause
         if (IsPaused)
         {
             ResumeGame();
@@ -129,29 +127,62 @@ public class GameManager : MonoBehaviour
         if (playerScore > highScore)
         {
             PlayerPrefs.SetInt("HighScore", playerScore);
-            Debug.Log($"New HighScore saved: {playerScore}");
         }
         PlayerPrefs.Save();
     }
 
+    public void SetCheckpoint(Vector3 position)
+    {
+        lastCheckpointPosition = position;
+        hasCheckpoint = true;
+    }
+
+    // Reset player về checkpoint và hồi máu
+    private void ResetToCheckpoint()
+    {
+        if (hasCheckpoint)
+        {
+            Player player = FindObjectOfType<Player>();
+            player.Respawn(lastCheckpointPosition);
+            // Reset máu của player
+            Stats playerStats = player.GetComponentInChildren<Stats>();
+            if (playerStats != null)
+            {
+                playerStats.Health.CurrentValue = playerStats.Health.MaxValue; // Giả sử Stats có phương thức reset máu
+                PlayerHealthBar.Instance.UpdateHealthBar(); // Cập nhật UI máu
+            }
+            UIManager.Instance.ShowGameHubUI();
+        }
+    }
+
     public void RestartGame()
     {
-        // Reset trạng thái pause
-        if (IsPaused)
-        {
-            ResumeGame();
-        }
+        if (IsPaused) ResumeGame();
 
+        if (hasCheckpoint)
+        {
+            ResetToCheckpoint(); // Reset về checkpoint nếu có
+        }
+        else
+        {
+            // Nếu không có checkpoint, reload scene
+            playerScore = 0;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            UIManager.Instance.ShowGameHubUI();
+            PlayerHealthBar.Instance.UpdateHealthBar();
+            UIManager.Instance.UpdateScore(playerScore);
+            hasCheckpoint = false; // Reset checkpoint
+        }
+    }
+    public void ResetScore()
+    {
         playerScore = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        UIManager.Instance.ShowGameHubUI();
         PlayerHealthBar.Instance.UpdateHealthBar();
         UIManager.Instance.UpdateScore(playerScore);
     }
 
     public void ExitButton()
     {
-        // Reset trạng thái pause
         if (IsPaused)
         {
             ResumeGame();
@@ -173,7 +204,6 @@ public class GameManager : MonoBehaviour
 
     public void ReturnMainMenu()
     {
-        // Reset trạng thái pause
         if (IsPaused)
         {
             ResumeGame();

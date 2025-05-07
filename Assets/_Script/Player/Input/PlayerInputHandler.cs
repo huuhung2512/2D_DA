@@ -61,17 +61,17 @@ public class PlayerInputHandler : MonoBehaviour
             AttackInputs[(int)CombatInputs.primary] = false;
         }
     }
-    public void OnSecondaryAttack(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            AttackInputs[(int)CombatInputs.secondary] = true;
-        }
-        if (context.canceled)
-        {
-            AttackInputs[(int)CombatInputs.secondary] = false;
-        }
-    }
+    //public void OnSecondaryAttack(InputAction.CallbackContext context)
+    //{
+    //    if (context.started)
+    //    {
+    //        AttackInputs[(int)CombatInputs.secondary] = true;
+    //    }
+    //    if (context.canceled)
+    //    {
+    //        AttackInputs[(int)CombatInputs.secondary] = false;
+    //    }
+    //}
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         RawMovementInput = context.ReadValue<Vector2>();
@@ -135,14 +135,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnDashDirectionInput(InputAction.CallbackContext context)
     {
-        // lay gia tri input cua chuot theo vector 2
-        RawDashDirectionInput = context.ReadValue<Vector2>();
-        if (playerInput.currentControlScheme == "KeyBroad")
-        {
-            RawDashDirectionInput = cam.ScreenToWorldPoint((Vector3)RawDashDirectionInput) - transform.position;
-        }
-        DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
+        if (!context.performed) return;
+        Vector3 mouseWorldPos = cam.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPos.z = 0; // Đảm bảo không thay đổi trục Z
+        RawDashDirectionInput = (mouseWorldPos - transform.position).normalized;
+        DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput);
     }
+
 
     public void UseJumpInput() => JumpInput = false;
     public void UseDashInput() => DashInput = false;

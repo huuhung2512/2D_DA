@@ -672,6 +672,7 @@ MonoBehaviour:
   ceilingCheck: {fileID: 0}
   groundCheckRadius: 0.4
   wallCheckDistance: 0.4
+  ledgeCheckDistance: 0
   ledgeCheckVerticalDistance: 0.5
   whatIsGround:
     serializedVersion: 2
@@ -968,9 +969,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Health>k__BackingField:
-    <MaxValue>k__BackingField: 100
+    <MaxValue>k__BackingField: 30
   <Poise>k__BackingField:
-    <MaxValue>k__BackingField: 100
+    <MaxValue>k__BackingField: 5
   poiseRecoveryRate: 25
 --- !u!1 &5348448254341585960
 GameObject:

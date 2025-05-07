@@ -17,6 +17,7 @@ public class AngryPig : Entity
     private D_ChargeState chargeStateData;
     [SerializeField]
     private D_MoveState moveStateData;
+
     public override void Awake()
     {
         base.Awake();
@@ -38,6 +39,7 @@ public class AngryPig : Entity
             //Destroy(gameObject);
         }
     }
+    
     private void Start()
     {
         stateMachine.Initialize(moveState);
